@@ -3,11 +3,14 @@
 	<head>
 		<title>ReefTankDoser {{pageName}}</title>
 		<link rel="stylesheet" type="text/css" href="{% static 'doser/style.css' %}" />
+		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 	<body>
-		<h1>ReefTankDoser {{pageName}}</h1>
+		<div class="bg-red-50">
+		<h1 class="text-4xl bold text-center">ReefTankDoser{{pageName}}</h1>
 		{% include 'doser/navigate.html' %}
 		{% include 'doser/messages.html' %}
 		{% block content %}
 		{% endblock %}
+	</div>
 	</body>
 </html>
