@@ -4,5 +4,7 @@ Logs/*
 launchWebServer.sh
 Doser/migrations/
 /Logs
+*/__pycache__
+/__pycache__
 Logs/debug.log.1
 .DS_store
