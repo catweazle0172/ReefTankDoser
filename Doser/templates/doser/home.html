@@ -1,0 +1,56 @@
+{% extends 'doser/base.html' %}
+
+{% block content %}
+
+{% if doseList %}
+	<form action="/doser/" method="post" id="queueDose">
+		{% csrf_token %}
+		<table>
+<tr>
+<td>Choose amount for manual dose:</td>
+{% for step in stepSizeList %}
+	{% if step == lastStepSize %}
+		<td><input type="radio" name="stepSize" title="Select step size for operations below" checked="checked" value="{{step}}"><label>{{step}}</label></td>
+	{% else %}
+		<td><input type="radio" name="stepSize" title="Select step size for operations below" value="{{step}}"><label>{{step}}</label></td>
+	{% endif %}
+{% endfor %}
+<td> ML</td>
+</tr>
+</table>
+		<table>
+		<tr><td>	
+		{% for dose in doseList %}
+			<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" class="queueButton" value="{{dose.doseName}}" />{{dose.doseName}}</button>
+
+		{% endfor %}
+		</td></tr>
+	</table>
+	</form>
+{% endif %}
+{% if jobList %}
+Dose Queue<br>
+	<form action="/doser/" method="post" id="updateQueue">
+		<table class="queueTable">
+		{% csrf_token %}
+		<tr><td>Dose</td><td>Status</td><td>Timestamp</td><td>Actions</td></tr><tr>
+		{% for job in jobList %}
+			<td title="Dose performed or queued to be run">{{job.jobName}}</td>
+			<td><input type="input" name="jobStatus" title="Status of the job" readonly="readonly" value="{{job.jobText}}" /></td>
+			<td><input type="input" name="timeStamp" title="When the job was completed or queued" value="{{job.timeStamp}}" /></td>
+			<td><button type="submit" form="updateQueue" name="jobAction" 
+			{% if job.jobAction == "DELETE" %}
+				title="Delete this job from the queue" onclick="return confirm('Are You Sure?')" 
+			{% elif job.jobAction == "REMOVE" %}
+				title="Remove this job from the queue"  onclick="return confirm('Are You Sure?')"
+			{% elif job.jobAction == "CANCEL" %}
+				title="Abort this job"  onclick="return confirm('Are You Sure?')"
+			{% endif %}
+			value="{{job.jobAction}}-{{job.jobIndex}}">{{job.jobAction}}</button></td>
+			</tr>
+		{% endfor %}
+	</table>
+	</form>
+{% endif %}
+{% endblock %}
+

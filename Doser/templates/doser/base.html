@@ -1,0 +1,13 @@
+{% load static %}
+<html>
+	<head>
+		<title>ReefTankDoser {{pageName}}</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'doser/style.css' %}" />
+	<body>
+		<h1>ReefTankDoser {{pageName}}</h1>
+		{% include 'doser/navigate.html' %}
+		{% include 'doser/messages.html' %}
+		{% block content %}
+		{% endblock %}
+	</body>
+</html>

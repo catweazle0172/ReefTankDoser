@@ -1,0 +1,27 @@
+{% extends 'doser/base.html' %}
+
+{% block content %}
+<form action="/doser/dosedef/" method="post" id="queueDose">
+{% csrf_token %}
+{% if doseToChange %}
+	<input type="hidden" name="originalDoseName" value="{{originalDoseName}}">	
+	<table>
+		{{doseDef.as_table}}
+	</table>
+	<input type="submit" class="genericButton" name="doseAction" value="Save">
+	<input type="submit" class="cancelButton" name="doseAction" value="Cancel">
+{% else %}
+	{% if doseDefList %}
+	<table>
+		{% for dose in doseDefList %}
+		<tr>
+		<td><input type="submit" name="doseListAction" class="doseEditButton" id="doseEdit" value="EDIT {{dose.doseName}}"></td>			
+		<td><input type="submit" name="doseListAction" class="doseDeleteButton" id="doseDel" value="DELETE {{dose.doseName}}" onclick="return confirm('Are You Sure?')"></td>
+		</tr>			
+		{% endfor %}
+	</table>
+	{% endif %}			
+	<input type="submit" name="doseAction" class="doseCreateButton" value="CREATE NEW">
+{% endif %}
+</form>
+{% endblock %}

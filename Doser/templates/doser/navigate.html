@@ -1,0 +1,16 @@
+{% load static %}
+<div class="navigation">
+<table>
+<tr>
+<td>
+<div class="navButton"><form action="/doser/" method="get"><button type="submit"  name="navButton" title="Jump to Home Status Screen" class="navigate" value="home">Home</button></form></div>
+<div class="navButton"><form action="/doser/history/" method="get"><button type="submit"  name="navButton" title="Jump to Test Results Screen" class="navigate" value="history">History</button></form></div>
+<div class="navButton"><form action="/doser/schedule/" method="get"><button type="submit"  name="navButton" title="Jump to Test Scheduler Screen" class="navigate" value="schedule">Schedule</button></form></div>
+<div class="navButton"><form action="/doser/dosedef/" method="get"><button type="submit"  name="navButton" title="Jump to Test Setup Screen" class="navigate" value="dosedef">Dose Setup</button></form></div>
+<div class="navButton"><form action="/doser/calibrate/" method="get"><button type="submit"  name="navButton" title="Jump to Calibration Screen" class="navigate" value="calibrate">Calibrate</button></form></div>
+<div class="navButton"><form action="/doser/logs/" method="get"><button type="submit"  name="navButton" title="Jump to Log Display Screen" class="navigate" value="logs">Logs</button></form></div>
+<div class="navButton"><form action="/doser/admin/" method="get"><button type="submit"  name="navButton" title="Jump to Administrative Setup Screen" class="navigate" value="admin">Admin</button></form></div>
+</td>
+</tr>
+</table>
+</div>

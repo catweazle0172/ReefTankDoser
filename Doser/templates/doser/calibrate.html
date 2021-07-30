@@ -1,0 +1,30 @@
+{% extends 'doser/base.html' %}
+
+{% block content %}
+<form action="/doser/calibrate/" method="post" id="queueDose">
+{% csrf_token %}
+<table>
+<tr>
+<td>Calibrate Dosing Pumps and expect +-50ML</td>
+</tr>
+</table>
+
+<br>
+	{{doserCalFormSet.management_form}}
+	<table>
+		{% for doserCalForm in doserCalFormSet %}
+			<table id="schedEntry">
+			<tr>-----------------------------------------------</tr>
+			{{doserCalForm.as_table}}
+		</table>
+		<table>
+				<td><button type="submit"  class="genericButton" title="Start dosing liquid for calibration" name="actionButton" value='{{doserCalForm.doseName.value}}/50'>Calibrate {{doserCalForm.doseName.value}}</button></td>
+				<td><button class="genericButton" type="submit" title="Save the changes" name="actionButton" value='UPDATE/{{doserCalForm.doseName.value}}'>UPDATE</button></td>
+				<td><input class="cancelButton"type="submit" title="Abandon the changes" name="actionButton" value="CANCEL"></td>
+			</table>
+		{% endfor %}
+	</table>
+
+</form>
+{% endblock %}
+	
