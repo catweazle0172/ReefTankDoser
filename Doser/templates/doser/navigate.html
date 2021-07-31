@@ -1,16 +1,10 @@
 {% load static %}
-<div class="navigation">
-<table>
-<tr>
-<td>
-<div class="navButton"><form action="/doser/" method="get"><button type="submit"  name="navButton" title="Jump to Home Status Screen" class="navigate" value="home">Home</button></form></div>
-<div class="navButton"><form action="/doser/history/" method="get"><button type="submit"  name="navButton" title="Jump to Test Results Screen" class="navigate" value="history">History</button></form></div>
-<div class="navButton"><form action="/doser/schedule/" method="get"><button type="submit"  name="navButton" title="Jump to Test Scheduler Screen" class="navigate" value="schedule">Schedule</button></form></div>
-<div class="navButton"><form action="/doser/dosedef/" method="get"><button type="submit"  name="navButton" title="Jump to Test Setup Screen" class="navigate" value="dosedef">Dose Setup</button></form></div>
-<div class="navButton"><form action="/doser/calibrate/" method="get"><button type="submit"  name="navButton" title="Jump to Calibration Screen" class="navigate" value="calibrate">Calibrate</button></form></div>
-<div class="navButton"><form action="/doser/logs/" method="get"><button type="submit"  name="navButton" title="Jump to Log Display Screen" class="navigate" value="logs">Logs</button></form></div>
-<div class="navButton"><form action="/doser/admin/" method="get"><button type="submit"  name="navButton" title="Jump to Administrative Setup Screen" class="navigate" value="admin">Admin</button></form></div>
-</td>
-</tr>
-</table>
+<div class="flex justify-around">
+  <div class="px-4 bg-gray-500 text-white rounded shadow"><form action="/doser/" method="get"><button type="submit"  name="navButton" title="Jump to Home Status Screen" value="home">Home</button></form></div>
+  <div class="px-4 bg-gray-500 text-white rounded shadow"><form action="/doser/history/" method="get"><button type="submit"  name="navButton" title="Jump to Test Results Screen" value="history">History</button></form></div>
+  <div class="px-4 bg-gray-500 text-white rounded shadow"><form action="/doser/schedule/" method="get"><button type="submit"  name="navButton" title="Jump to Test Scheduler Screen" value="schedule">Schedule</button></form></div>
+  <div class="px-4 bg-gray-500 text-white rounded shadow"><form action="/doser/dosedef/" method="get"><button type="submit"  name="navButton" title="Jump to Test Setup Screen" value="dosedef">Dose Setup</button></form></div>
+  <div class="px-4 bg-gray-500 text-white rounded shadow"><form action="/doser/calibrate/" method="get"><button type="submit"  name="navButton" title="Jump to Calibration Screen" value="calibrate">Calibrate</button></form></div>
+  <div class="px-4 bg-gray-500 text-white rounded shadow"><form action="/doser/logs/" method="get"><button type="submit"  name="navButton" title="Jump to Log Display Screen" value="logs">Logs</button></form></div>
+  <div class="px-4 bg-gray-500 text-white rounded shadow"><form action="/doser/admin/" method="get"><button type="submit"  name="navButton" title="Jump to Administrative Setup Screen" value="admin">Admin</button></form></div>
 </div>

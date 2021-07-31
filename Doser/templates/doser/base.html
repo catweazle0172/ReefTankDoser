@@ -1,16 +1,24 @@
 {% load static %}
 <html>
-	<head>
-		<title>ReefTankDoser {{pageName}}</title>
-		<link rel="stylesheet" type="text/css" href="{% static 'doser/style.css' %}" />
-		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-	<body>
-		<div class="bg-red-50">
-		<h1 class="text-4xl bold text-center">ReefTankDoser{{pageName}}</h1>
-		{% include 'doser/navigate.html' %}
-		{% include 'doser/messages.html' %}
-		{% block content %}
-		{% endblock %}
-	</div>
-	</body>
+  <head>
+    <title>ReefTankDoser - {{pageName}}</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'doser/style.css' %}"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+	</head>
+  <body class="bg-gray-200">
+    <div class="m-10 p-4 bg-white shadow rounded">
+      <h1 class="p-4 text-4xl bold text-center">
+        ReefTankDoser - {{pageName}}
+      </h1>
+      {% include 'doser/navigate.html' %} {% include 'doser/messages.html' %} {%
+      block content %} {% endblock %}
+    </div>
+  </body>
 </html>
