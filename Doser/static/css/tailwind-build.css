@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .tmenuitem {
+    @apply px-4 py-2 mx-2 text-sm lg:text-base text-gray-800 rounded hover:bg-blue-300 hover:shadow;
+  }
+  .menuitems {
+    @apply mr-8;
+  }
+}

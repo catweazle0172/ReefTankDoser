@@ -19,7 +19,7 @@
 </tr>
 </table>
 		<table>
-		<tr><td>	
+		<tr><td>
 		{% for dose in doseList %}
 			<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" class="queueButton" value="{{dose.doseName}}" />{{dose.doseName}}</button>
 
@@ -38,9 +38,9 @@ Dose Queue<br>
 			<td title="Dose performed or queued to be run">{{job.jobName}}</td>
 			<td><input type="input" name="jobStatus" title="Status of the job" readonly="readonly" value="{{job.jobText}}" /></td>
 			<td><input type="input" name="timeStamp" title="When the job was completed or queued" value="{{job.timeStamp}}" /></td>
-			<td><button type="submit" form="updateQueue" name="jobAction" 
+			<td><button type="submit" form="updateQueue" name="jobAction"
 			{% if job.jobAction == "DELETE" %}
-				title="Delete this job from the queue" onclick="return confirm('Are You Sure?')" 
+				title="Delete this job from the queue" onclick="return confirm('Are You Sure?')"
 			{% elif job.jobAction == "REMOVE" %}
 				title="Remove this job from the queue"  onclick="return confirm('Are You Sure?')"
 			{% elif job.jobAction == "CANCEL" %}
@@ -53,4 +53,3 @@ Dose Queue<br>
 	</form>
 {% endif %}
 {% endblock %}
-

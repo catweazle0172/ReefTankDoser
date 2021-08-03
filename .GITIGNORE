@@ -7,3 +7,4 @@ Doser/migrations/
 /__pycache__
 Logs/debug.log.1
 .DS_store
+node_modules/
