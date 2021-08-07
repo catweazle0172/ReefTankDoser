@@ -2,54 +2,97 @@
 
 {% block content %}
 
+<!-- Dose Run -->
 {% if doseList %}
-	<form action="/doser/" method="post" id="queueDose">
-		{% csrf_token %}
-		<table>
-<tr>
-<td>Choose amount for manual dose:</td>
-{% for step in stepSizeList %}
-	{% if step == lastStepSize %}
-		<td><input type="radio" name="stepSize" title="Select step size for operations below" checked="checked" value="{{step}}"><label>{{step}}</label></td>
-	{% else %}
-		<td><input type="radio" name="stepSize" title="Select step size for operations below" value="{{step}}"><label>{{step}}</label></td>
-	{% endif %}
-{% endfor %}
-<td> ML</td>
-</tr>
-</table>
-		<table>
-		<tr><td>
-		{% for dose in doseList %}
-			<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" class="queueButton" value="{{dose.doseName}}" />{{dose.doseName}}</button>
+<div class="bdivider">
+	<div class="content">
+		<form action="/doser/" method="post" id="queueDose">
+			{% csrf_token %}
+			<div class="text-center font-bold">
+				Choose amount for manual dose
+			</div>
+			<div class="content-withtitle">
+				{% for step in stepSizeList %}
+				{% if step == lastStepSize %}
+				<input class="btn-radio" type="radio" name="stepSize" title="Select step size for operations below" checked="checked" value="{{step}}"><label>{{step}} ml</label></td>
+				{% else %}
+				<input class="btn-radio" type="radio" name="stepSize" title="Select step size for operations below" value="{{step}}"><label>{{step}} ml</label></td>
+				{% endif %}
+				{% endfor %}
+			</div>
+			<div class="content-notitle">
+			{% for dose in doseList %}
+				<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" class="btn" value="{{dose.doseName}}" />{{dose.doseName}}</button>
+			{% endfor %}
+			</div>
+		</form>
+	</div>
+</div>
 
-		{% endfor %}
-		</td></tr>
-	</table>
-	</form>
 {% endif %}
+
+<!-- Dose lists -->
 {% if jobList %}
-Dose Queue<br>
-	<form action="/doser/" method="post" id="updateQueue">
-		<table class="queueTable">
-		{% csrf_token %}
-		<tr><td>Dose</td><td>Status</td><td>Timestamp</td><td>Actions</td></tr><tr>
-		{% for job in jobList %}
-			<td title="Dose performed or queued to be run">{{job.jobName}}</td>
-			<td><input type="input" name="jobStatus" title="Status of the job" readonly="readonly" value="{{job.jobText}}" /></td>
-			<td><input type="input" name="timeStamp" title="When the job was completed or queued" value="{{job.timeStamp}}" /></td>
-			<td><button type="submit" form="updateQueue" name="jobAction"
-			{% if job.jobAction == "DELETE" %}
-				title="Delete this job from the queue" onclick="return confirm('Are You Sure?')"
-			{% elif job.jobAction == "REMOVE" %}
-				title="Remove this job from the queue"  onclick="return confirm('Are You Sure?')"
-			{% elif job.jobAction == "CANCEL" %}
-				title="Abort this job"  onclick="return confirm('Are You Sure?')"
-			{% endif %}
-			value="{{job.jobAction}}-{{job.jobIndex}}">{{job.jobAction}}</button></td>
-			</tr>
-		{% endfor %}
-	</table>
-	</form>
+<div class="py-4">
+	<div class="title">
+		Dose Queue
+	</div>
+	<div>
+		<form action="/doser/" method="post" id="updateQueue">
+			<table class="table">
+			{% csrf_token %}
+				<thead class="table-thead">
+					<th class="table-th">Dose</th>
+					<th class="table-th">Status</th>
+					<th class="table-th">Timestamp</th>
+					<th class="table-th">Actions</th>
+				</thead>
+				<tbody>
+				{% for job in jobList %}
+					<tr class="table-tr">
+						<td class="table-td font-bold">{{job.jobName}}</td>
+						<td class="table-td"><span
+						{% if "Queued" in job.jobText %}
+							class="btn-status btn-status-yellow"
+						{% elif "Failed" in job.jobText %}
+							class="btn-status btn-status-red"
+						{% elif "Completed" in job.jobText %}
+							class="btn-status btn-status-green"
+						{% endif %}
+						>{{job.jobText}}</span></td>
+						<td class="table-td">{{job.timeStamp}}</td>
+						<td class="table-td"><button class="hover:font-bold hover:text-red-600" type="submit" form="updateQueue" name="jobAction"
+						{% if job.jobAction == "DELETE" %}
+							title="Delete this job from the queue" onclick="return confirm('Are You Sure?')"
+						{% elif job.jobAction == "REMOVE" %}
+							title="Remove this job from the queue"  onclick="return confirm('Are You Sure?')"
+						{% elif job.jobAction == "CANCEL" %}
+							title="Abort this job"  onclick="return confirm('Are You Sure?')"
+						{% endif %}
+						value="{{job.jobAction}}-{{job.jobIndex}}">{{job.jobAction}}
+						</button></td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</form>
+	</div>
+</div>
+
 {% endif %}
 {% endblock %}
+
+<!-- <tr>
+	<td title="Dose performed or queued to be run">{{job.jobName}}</td>
+	<td><input type="input" name="jobStatus" title="Status of the job" readonly="readonly" value="{{job.jobText}}" /></td>
+	<td><input type="input" name="timeStamp" title="When the job was completed or queued" value="{{job.timeStamp}}" /></td>
+	<td><button type="submit" form="updateQueue" name="jobAction"
+	{% if job.jobAction == "DELETE" %}
+		title="Delete this job from the queue" onclick="return confirm('Are You Sure?')"
+	{% elif job.jobAction == "REMOVE" %}
+		title="Remove this job from the queue"  onclick="return confirm('Are You Sure?')"
+	{% elif job.jobAction == "CANCEL" %}
+		title="Abort this job"  onclick="return confirm('Are You Sure?')"
+	{% endif %}
+	value="{{job.jobAction}}-{{job.jobIndex}}">{{job.jobAction}}</button></td>
+</tr> -->

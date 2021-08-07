@@ -4,6 +4,7 @@
   "description": "tailwindcss for reeftankdoser",
   "main": "postcss.config.js",
   "dependencies": {
+    "@tailwindcss/forms": "^0.3.3",
     "autoprefixer": "^10.3.1",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
@@ -13,7 +14,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss css/tailwind-build.css -o doser/styles.css"
+    "build": "postcss css/tailwind-build.css -o doser/styles.css",
+    "build -w": "postcss css/tailwind-build.css -o doser/styles.css -w"
   },
   "author": "",
   "license": "ISC"

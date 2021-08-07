@@ -3,10 +3,55 @@
 @tailwind utilities;
 
 @layer components {
-  .tmenuitem {
-    @apply px-4 py-2 mx-2 text-sm lg:text-base text-gray-800 rounded hover:bg-blue-300 hover:shadow;
+  .menuitem {
+    @apply px-4 py-1 md:py-2 mx-2 text-sm lg:text-base text-gray-800 hover:text-white bg-gradient-to-r hover:from-green-400 hover:to-blue-500 rounded hover:shadow;
   }
-  .menuitems {
-    @apply mr-8;
+  .bdivider{
+    @apply border-b border-gray-200;
+  }
+  .content {
+    @apply mx-auto max-w-max text-sm lg:text-base;
+  }
+  .title {
+    @apply p-4 text-2xl font-bold text-center;
+  }
+  .content-withtitle {
+    @apply flex justify-center items-center space-x-2 pb-4;
+  }
+  .content-notitle {
+    @apply flex justify-center items-center space-x-2 py-4;
+  }
+  .btn {
+    @apply px-4 py-2 mx-2 text-sm lg:text-base text-white bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 rounded shadow;
+  }
+  .btn-status {
+    @apply py-1 px-3 rounded-full text-xs;
+  }
+  .btn-status-green {
+    @apply bg-green-200 text-green-600;
+  }
+  .btn-status-yellow {
+    @apply bg-yellow-200 text-yellow-600;
+  }
+  .btn-status-red {
+    @apply bg-red-200 text-red-600;
+  }
+  .btn-radio {
+    @apply text-blue-500;
+  }
+  .table {
+    @apply mx-auto table-auto w-full lg:w-5/6 text-gray-600 text-sm shadow-md rounded;
+  }
+  .table-thead {
+    @apply bg-gray-200 border border-gray-200 text-left uppercase leading-normal;
+  }
+  .table-th {
+    @apply py-1 px-1.5;
+  }
+  .table-tr {
+    @apply border border-gray-200 odd:bg-gray-50;
+  }
+  .table-td {
+    @apply p-1.5;
   }
 }
