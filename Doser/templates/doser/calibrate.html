@@ -1,30 +1,39 @@
 {% extends 'doser/base.html' %}
 
 {% block content %}
-<form action="/doser/calibrate/" method="post" id="queueDose">
-{% csrf_token %}
-<table>
-<tr>
-<td>Calibrate Dosing Pumps and expect +-50ML</td>
-</tr>
-</table>
 
-<br>
-	{{doserCalFormSet.management_form}}
-	<table>
+<div>
+	<div class="content">
+		<div class="py-4 text-center font-bold">
+			Calibrate Dosing Pumps and expect +-50ML
+		</div>
+	</div>
+
+	<form action="/doser/calibrate/" method="post" id="queueDose">
+		{% csrf_token %}
+		{{doserCalFormSet.management_form}}
 		{% for doserCalForm in doserCalFormSet %}
-			<table id="schedEntry">
-			<tr>-----------------------------------------------</tr>
-			{{doserCalForm.as_table}}
-		</table>
-		<table>
-				<td><button type="submit"  class="genericButton" title="Start dosing liquid for calibration" name="actionButton" value='{{doserCalForm.doseName.value}}/50'>Calibrate {{doserCalForm.doseName.value}}</button></td>
-				<td><button class="genericButton" type="submit" title="Save the changes" name="actionButton" value='UPDATE/{{doserCalForm.doseName.value}}'>UPDATE</button></td>
-				<td><input class="cancelButton"type="submit" title="Abandon the changes" name="actionButton" value="CANCEL"></td>
-			</table>
+		<div class="tdivider">
+			<div class="content">
+				<div class="py-4 text-center font-bold">
+					Dose - {{doserCalForm.doseName.value}}
+				</div>
+				<div class="content-notitle">
+					<table id="schedEntry">
+						{{doserCalForm.as_table}}
+					</table>
+				</div>
+			</div>
+			<div class="py-4">
+				<div class="content-notitle">
+					<button class="btn" type="submit" title="Start dosing liquid for calibration" name="actionButton" value='{{doserCalForm.doseName.value}}/50'>Calibrate</button>
+					<button class="btn" type="submit" title="Save the changes" name="actionButton" value='UPDATE/{{doserCalForm.doseName.value}}'>Update</button>
+					<button class="btn" type="submit" title="Abandon the changes" name="actionButton" value="CANCEL">Cancel</button>
+				</div>
+			</div>
+		</div>
 		{% endfor %}
-	</table>
+	</form>
+</div>
 
-</form>
 {% endblock %}
-	

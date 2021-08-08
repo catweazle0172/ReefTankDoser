@@ -1,18 +1,38 @@
 {% extends 'doser/base.html' %}
 
 {% block content %}
-<form action="/doser/schedule/" method="post" id="queueDose">
-	{% csrf_token %}
-	{{schedFormSet.management_form}}
-	<table>
+
+<div>
+	<div class="content">
+		<div class="py-4 text-center font-bold">
+			Change schedule set-ups
+		</div>
+	</div>
+
+	<form action="/doser/schedule/" method="post" id="queueDose">
+		{% csrf_token %}
+		{{schedFormSet.management_form}}
 		{% for schedForm in schedFormSet %}
-			<table id="schedEntry">
-			<tr>-----------------------------------------------</tr>
-			{{schedForm.as_table}}
-			</table>
+		<div class="tdivider">
+			<div class="content">
+				<div class="py-4 text-center font-bold">
+					Schedule for - {{schedForm.schedName.value}}
+				</div>
+				<div class="content-notitle">
+					<table id="schedEntry">
+						{{schedForm.as_table}}
+					</table>
+				</div>
+			</div>
+			<div class="py-4">
+				<div class="content-notitle">
+					<button class="btn" type="submit" title="Save the changes" name="actionButton" value="UPDATE">Update</button>
+					<button class="btn" type="submit" title="Abandon the changes" name="actionButton" value="CANCEL">Cancel</button>
+				</div>
+			</div>
+		</div>
 		{% endfor %}
-	</table>
-	<input class="btn" type="submit" title="Save the changes" name="actionButton" value="UPDATE">
-	<input class="btn" type="submit" title="Abandon the changes" name="actionButton" value="CANCEL">
-</form>
+	</form>
+</div>
+
 {% endblock %}

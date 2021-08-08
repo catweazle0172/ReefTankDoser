@@ -3,60 +3,64 @@
 {% block content %}
 
 <!-- Dose Def -->
+{% if doseToChange %}
 <div>
-<form action="/doser/dosedef/" method="post" id="queueDose">
-	<div class="bdivider">
-		<div class="content">
+	<div class="content">
+		<form action="/doser/dosedef/" method="post" id="queueDose">
 			{% csrf_token %}
 			<div class="text-center font-bold">
 				Change dose settings
 			</div>
-			<div class="content-withtitle">
-				{% if doseToChange %}
-				<input type="hidden" name="originalDoseName" value="{{originalDoseName}}">
+			<div class="content-notitle">
+				<button type="hidden" name="originalDoseName" value="{{originalDoseName}}"></button>
 				<table>
-				{{doseDef.as_table}}
+					{{doseDef.as_table}}
 				</table>
 			</div>
 			<div class="content-notitle">
-				<input type="submit" class="btn" name="doseAction" value="Save">
-				<input type="submit" class="btn" name="doseAction" value="Cancel">
+				<button type="submit" class="btn" name="doseAction" value="Save">Save</button>
+				<button type="submit" class="btn" name="doseAction" value="Cancel">Cancel</button>
 			</div>
+		</form>
 	</div>
 </div>
+
 {% else %}
 {% if doseDefList %}
 
-<!-- List of dose -->
+<!-- List of doses -->
 <div class="py-4">
-	<div>
-
-	<table class="table">
-		<thead class="table-thead">
-			<th class="table-th">Name</th>
-			<th class="table-th" colspan="2">Actions</th>
-		</thead>
-		<tbody>
-			{% for dose in doseDefList %}
-			<tr class="table-tr">
-				<td class="table-td font-bold">{{dose.doseName}}</td>
-				<td class="table-td"><input type="submit" name="doseListAction" class="hover:font-bold hover:text-yellow-600" id="doseEdit" value="EDIT {{dose.doseName}}"></td>
-				<td class="table-td"><input type="submit" name="doseListAction" class="hover:font-bold hover:text-red-600" id="doseDel" value="DELETE {{dose.doseName}}" onclick="return confirm('Are You Sure?')"></td>
-			</tr>
-			{% endfor %}
-			{% endif %}
-			<tr class="table-tr">
-				<td class="table-td" colspan="2"></td>
-				<td class="table-td"><input type="submit" name="doseAction" class="hover:font-bold hover:text-green-600" value="CREATE NEW"></td>
-			</tr>
-		</tbody>
-	</table>
-{% endif %}
-		</div>
+	<div class="text-center font-bold pb-4">
+		Change dose settings
 	</div>
-</form>
+	<div>
+		<form action="/doser/dosedef/" method="post" id="queueDose">
+			<table class="table w-2/6">
+			{% csrf_token %}
+				<thead class="table-thead">
+					<th class="table-th">Name</th>
+					<th class="table-th" colspan="2">Actions</th>
+				</thead>
+				<tbody>
+					{% for dose in doseDefList %}
+					<tr class="table-tr">
+						<td class="table-td font-bold">{{dose.doseName}}</td>
+						<td class="table-td"><button type="submit" name="doseListAction" class="hover:font-bold hover:text-yellow-600" id="doseEdit" value="EDIT {{dose.doseName}}">Edit</button></td>
+						<td class="table-td"><button type="submit" name="doseListAction" class="hover:font-bold hover:text-red-600" id="doseDel" value="DELETE {{dose.doseName}}" onclick="return confirm('Are You Sure?')">Delete</button></td>
+					</tr>
+					{% endfor %}
+					{% endif %}
+					<tr class="table-tr">
+						<td class="table-td" colspan="2"></td>
+						<td class="table-td"><button type="submit" name="doseAction" class="hover:font-bold hover:text-green-600" value="CREATE NEW">Create New</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
 </div>
 
+{% endif %}
 {% endblock %}
 
 <!-- <form action="/doser/dosedef/" method="post" id="queueDose">

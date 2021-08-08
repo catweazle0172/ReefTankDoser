@@ -1,24 +1,47 @@
 {% extends 'doser/base.html' %}
 
 {% block content %}
-<div class="adminTable">
-<form action="/doser/admin/" method="post" id="adminSetup">
-{% csrf_token %}
-<table>
-<tr><td>ReefTankDoser Configuration:</td></tr>
-{% if doserAdminForm %}
-	{{doserAdminForm.as_table}}
-{% endif %}
-</table>
-	<input type="submit" class="genericButton" title="Generates an Telegram test message to ensure the key works" name="actionButton" value="Test Telegram">
-	<input type="submit" class="genericButton" title="Updates the tester configuration" name="actionButton" value="UPDATE">
-	<input type="submit" class="cancelButton" title="Cancels any changes" name="actionButton" value="CANCEL">
-</form>
+
+<div>
+	<div class="content">
+		<div class="py-4 text-center font-bold">
+			ReefTankDoser Configuration
+		</div>
+	</div>
+
+	<form action="/doser/admin/" method="post" id="adminSetup">
+		{% csrf_token %}
+		{% if doserAdminForm %}
+		<div class="bdivider">
+			<div class="content">
+				<div class="content-notitle">
+					<table id="schedEntry">
+						{{doserAdminForm.as_table}}
+					</table>
+				</div>
+			</div>
+			{% endif %}
+			<div class="py-4">
+				<div class="content-notitle">
+					<button class="btn" type="submit" title="Generates an Telegram test message to ensure the key works" name="actionButton" value="Test Telegram">Test Telegram</button>
+					<button class="btn" type="submit" title="Updates the tester configuration" name="actionButton" value="UPDATE">Update</button>
+					<button class="btn" type="submit" title="Cancels any changes" name="actionButton" value="CANCEL">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</form>
 </div>
-<br>
-<form action="/admin/login/" method="get" id="userAdmin">
-	{% csrf_token %}
-	<button type="submit" form="userAdmin" title="User Administration including Logging out and password change" name="manageUsers" class="genericButton" value="manageUsers" />Manage Users</button>
-</form>
+
+<div class="py-4">
+	<div class="py-4 text-center font-bold">
+		User Configuration
+	</div>
+	<div class="content-notitle">
+		<form action="/admin/login/" method="get" id="userAdmin">
+			{% csrf_token %}
+			<button class="btn" type="submit" form="userAdmin" title="User Administration including Logging out and password change" name="manageUsers" value="manageUsers" />Manage Users</button>
+		</form>
+	</div>
+</div>
+
 {% endblock %}
-	
