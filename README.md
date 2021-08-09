@@ -1,14 +1,19 @@
-ReefTankDoser
-=============
+# :tropical_fish: ReefTankDoser
 
-Starten:
---------
+A application to handle your ReefTankDoser. ... ...
 
-1. python3 start.py
+## Installation
 
-2. Ga in je browser naar localhost:8001
-3. Zonder gebruik van request naar pompen: python3 manage.py runserver 8001
+1. install missing node_modules with `$ npm install`
+2. Run script for building css file with `$ npm run build`
 
-Gebruikersnaam en Wachtwoord online:
-admin
-Welkom#1
+## Start server
+
+- python3 start.py
+*or*
+- python3 manage.py runserver 8001 (Zonder communicatie met pompen)
+
+## Use applicition
+
+1. Ga in je browser naar localhost:8001
+2. Login met `admin` en `Welkom#1`
