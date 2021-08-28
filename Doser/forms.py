@@ -6,9 +6,7 @@ class ScheduleForm(forms.ModelForm):
     class Meta:
         model = DoseSchedule
         exclude=()
-#        widgets = {
-#            'doseToSchedule': Textarea(attrs={'cols': 80, 'rows': 20}),
-#        }
+
     def __init__(self, *args, **kwargs):
         super(ScheduleForm, self).__init__(*args, **kwargs)
         if self.instance.id:
@@ -21,9 +19,6 @@ class DoseDefinitionForm(forms.ModelForm):
     class Meta:
         model = DoseDefinition
         exclude=('pumpSpeed','pumpSteps','totalDoseAfterStartup','calibrateValue')
-#        widgets = {
-#            'testToSchedule': Textarea(attrs={'cols': 80, 'rows': 20}),
-#        }
 
 class DoserForm(forms.ModelForm):
     class Meta:
@@ -63,10 +58,8 @@ class DoserForm(forms.ModelForm):
 class CalibrationForm(forms.ModelForm):
     class Meta:
         model = DoseDefinition
-        exclude=('enableDose','amount','Arduino_Choices','arduinoNumber','pumpName','fluidRemainingInML','containerInML','totalDoseAfterStartup','changeDirection','pumpSteps','minimumThreshold')
-#        widgets = {
-#            'testToSchedule': Textarea(attrs={'cols': 80, 'rows': 20}),
-#        }
+        exclude=('enableDose','amount','Arduino_Choices','arduinoNumber','pumpName','fluidRemainingInML','containerInML','totalDoseAfterStartup','changeDirection','pumpSteps','minimumThreshold','alarmSent')
+
     def __init__(self, *args, **kwargs):
         super(CalibrationForm, self).__init__(*args, **kwargs)
         if self.instance.id:

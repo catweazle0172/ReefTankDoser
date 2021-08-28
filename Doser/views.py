@@ -17,7 +17,7 @@ from .forms import ScheduleForm,DoserForm,DoseDefinitionForm,CalibrationForm
 
 def sendCmdToDoser(cmd):
     try:
-        c=rpyc.connect("localhost", 18861)
+        c=rpyc.connect("localhost", 18862)
         res=c.root.doserOperation(cmd)
         print('Sent: ' + cmd) 
     except:

@@ -98,7 +98,7 @@ def runDoseSequence(doser,sequenceName,amount):
 		doser.debugLog.exception('Failure when running Dose')
 
 	if fluidRemainingInML<ts.minimumThreshold:
-		doser.sendReagentAlarm(doser,sequenceName,fluidRemainingInML)
+		doser.sendReagentAlarm(doser,sequenceName,fluidRemainingInML,ts.alarmSent)
 
 	doser.systemStatus="Idle"
 	return doseSucceeded
@@ -109,6 +109,7 @@ def clearJobSchedules():
 
 def dailyMaintenance():
 	doser.removeOldRecords()
+	doser.resetAlarmSent()
 
 def resetJobSchedules():
 	clearJobSchedules()
@@ -117,7 +118,7 @@ def resetJobSchedules():
 			setJobSchedules(ts) 
 		except:
 			pass 
-	schedule.every().day.at('22:05').do(dailyMaintenance).tag('Maintenance')
+	schedule.every().day.at('21:04').do(dailyMaintenance).tag('Maintenance')
 
 def setJobSchedules(doseName):
 	dose=doser.getJobDaysText(doseName)
@@ -235,7 +236,7 @@ if __name__ == '__main__':
 	
 	doser.runDoseLock=threading.Lock()
 	doser.doserLog.info('Feeded Server Threaded Started')
-	remoteControlThreadRPYC = ThreadedServer(DoserRemoteControl(), port = 18861,protocol_config = {"allow_public_attrs" : True})
+	remoteControlThreadRPYC = ThreadedServer(DoserRemoteControl(), port = 18862,protocol_config = {"allow_public_attrs" : True})
 	atexit.register(exit_handler)
 	remoteControlThread=threading.Thread(target=startHandler,args=('Remote Control',remoteControlThreadRPYC))
 	remoteControlThread.start()

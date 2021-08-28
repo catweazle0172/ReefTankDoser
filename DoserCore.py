@@ -73,6 +73,7 @@ class Doser:
 			ts.fluidRemainingInML=seq.fluidRemainingInML
 			ts.containerInML=seq.containerInML
 			ts.minimumThreshold=seq.minimumThreshold
+			ts.alarmSent=seq.alarmSent
 			ts.totalDoseAfterStartup=seq.totalDoseAfterStartup
 			ts.changeDirection=seq.changeDirection
 			ts.pumpSpeed=seq.pumpSpeed
@@ -87,56 +88,75 @@ class Doser:
 				self.ARDUINO1=serial.Serial(self.arduino1, 115200, timeout=.1)
 				print('Arduino 1 connected')
 				time.sleep(2)
-				return True
 
 			except:
 				print('Unable to connect to Arduino 1')
-				return False
+
 		if self.arduino2:
 			try:
 				self.ARDUINO2=serial.Serial(self.arduino2, 115200, timeout=.1)
 				print('Arduino 2 connected')
 				time.sleep(2)
-				return True
 
 			except:
 				print('Unable to connect to Arduino 2')
-				return False
+
 		if self.arduino3:
 			try:
 				self.ARDUINO3=serial.Serial(self.arduino3, 115200, timeout=.1)
 				print('Arduino 3 connected')
 				time.sleep(2)
-				return True
 
 			except:
 				print('Unable to connect to Arduino 3')
-				return False
+
 		if self.arduino4:
 			try:
 				self.ARDUINO4=serial.Serial(self.arduino4, 115200, timeout=.1)
 				print('Arduino 4 connected')
 				time.sleep(2)
-				return True
 
 			except:
 				print('Unable to connect to Arduino 4')
-				return False
 
 	def reconnectToArduino(self):	
 		if self.arduino1:
-			self.ARDUINO1.close()
-			time.sleep(1)
-		if self.arduino2:
-			self.ARDUINO2.close()
-			time.sleep(1)
-		if self.arduino3:
-			self.ARDUINO3.close()
-			time.sleep(1)
-		if self.arduino4:
-			self.ARDUINO4.close()
-			time.sleep(1)
+			try:
+				self.ARDUINO1.close()
+				time.sleep(2)
+				print ('disconected Arduino 1')
 
+			except:
+				print ("not able to disconnect Arduino 1")
+
+		if self.arduino2:
+			try:
+				self.ARDUINO2.close()
+				time.sleep(2)
+				print ('disconected Arduino 2')
+
+			except:
+				print ("not able to disconnect Arduino 2")
+
+		if self.arduino3:
+			try:
+				self.ARDUINO3.close()
+				time.sleep(2)
+				print ('disconected Arduino 3')
+
+			except:
+				print ("not able to disconnect Arduino 3")
+				
+		if self.arduino4:
+			try:	
+				self.ARDUINO4.close()
+				time.sleep(2)
+				print ('disconected Arduino 4')
+
+			except:
+				print ("not able to disconnect Arduino 4")
+
+		print('Disconnect Arduinos completed')
 		self.connectingArduino()
 		self.resetTotalDoseAfterStartup()
 
@@ -311,7 +331,7 @@ class Doser:
 				while True: 
 					self.ARDUINO1.write(str.encode("?" + '\n'))
 					self.ARDUINO1.flushInput() 
-					time.sleep(0.2)
+					time.sleep(0.5)
 					grbl_out = str(self.ARDUINO1.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -332,6 +352,7 @@ class Doser:
 						if (round(float(zas),2)) == float(ML):
 							return True
 			except:
+				self.sendArduinoConnectionError(arduino)
 				return False
 
 		if arduino=='ARDUINO2':
@@ -341,7 +362,7 @@ class Doser:
 				while True: 
 					self.ARDUINO2.write(str.encode("?" + '\n'))
 					self.ARDUINO2.flushInput() 
-					time.sleep(0.2)
+					time.sleep(0.5)
 					grbl_out = str(self.ARDUINO2.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -363,6 +384,7 @@ class Doser:
 							return True
 
 			except:
+				self.sendArduinoConnectionError(arduino)
 				return False
 
 		if arduino=='ARDUINO3':
@@ -372,7 +394,7 @@ class Doser:
 				while True: 
 					self.ARDUINO3.write(str.encode("?" + '\n'))
 					self.ARDUINO3.flushInput() 
-					time.sleep(0.2)
+					time.sleep(0.5)
 					grbl_out = str(self.ARDUINO3.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -394,6 +416,7 @@ class Doser:
 							return True
 
 			except:
+				self.sendArduinoConnectionError(arduino)
 				return False
 
 		if arduino=='ARDUINO4':
@@ -403,7 +426,7 @@ class Doser:
 				while True: 
 					self.ARDUINO4.write(str.encode("?" + '\n'))
 					self.ARDUINO4.flushInput() 
-					time.sleep(0.2)
+					time.sleep(0.5)
 					grbl_out = str(self.ARDUINO4.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -425,6 +448,7 @@ class Doser:
 							return True
 
 			except:
+				self.sendArduinoConnectionError(arduino)
 				return False
 
 	def calibrate(self,dose):
@@ -453,51 +477,75 @@ class Doser:
 				self.ARDUINO1.write(str.encode('$' + str(steps) + '=' + str(Jobs.pumpSteps) + '\n'))
 				time.sleep(1)
 				self.ARDUINO1.write(str.encode('$' + str(speed) + '=' + str(Jobs.pumpSpeed) + '\n'))
-				time.sleep(1)
+				time.sleep(2)
 			elif Jobs.arduinoNumber=='ARDUINO2':
 				self.ARDUINO2.write(str.encode('$' + str(steps) + '=' + str(Jobs.pumpSteps) + '\n'))
 				time.sleep(1)
 				self.ARDUINO2.write(str.encode('$' + str(speed) + '=' + str(Jobs.pumpSpeed) + '\n'))
-				time.sleep(1)
+				time.sleep(2)
 			elif Jobs.arduinoNumber=='ARDUINO3':
 				self.ARDUINO3.write(str.encode('$' + str(steps) + '=' + str(Jobs.pumpSteps) + '\n'))
 				time.sleep(1)
 				self.ARDUINO3.write(str.encode('$' + str(speed) + '=' + str(Jobs.pumpSpeed) + '\n'))
-				time.sleep(1)
+				time.sleep(2)
 			elif Jobs.arduinoNumber=='ARDUINO4':
 				self.ARDUINO4.write(str.encode('$' + str(steps) + '=' + str(Jobs.pumpSteps) + '\n'))
 				time.sleep(1)
 				self.ARDUINO4.write(str.encode('$' + str(speed) + '=' + str(Jobs.pumpSpeed) + '\n'))
-				time.sleep(1)
+				time.sleep(2)
 
 			self.reconnectToArduino()
 
 		except:
+			self.sendArduinoConnectionError(arduino)
 			return
 
 
 	def resetTotalDoseAfterStartup(self):
 		from Doser.models import DoseDefinition
-
 		testList=DoseDefinition.objects.all()
 		for tests in testList:
 			Jobs=DoseDefinition.objects.get(doseName=tests)
 			Jobs.totalDoseAfterStartup='0'
 			Jobs.save()
 
+	def resetAlarmSent(self):
+		from Doser.models import DoseDefinition
+		testList=DoseDefinition.objects.all()
+		for tests in testList:
+			Jobs=DoseDefinition.objects.get(doseName=tests)
+			Jobs.alarmSent=False
+			Jobs.save()
+
+	def setAlarmSentTrue(self,sequenceName):
+		from Doser.models import DoseDefinition
+		Jobs=DoseDefinition.objects.get(doseName=sequenceName)
+		Jobs.alarmSent=True
+		Jobs.save()
+
 	def telegram_bot_sendtext(self,message):
 		send_text = 'https://api.telegram.org/bot' + (str(self.telegramBotToken)) + '/sendMessage?chat_id=' + (str(self.telegramChatID)) + '&parse_mode=Markdown&text=' + (str(message))
-		print('send mesage: ' + message)
-		response = requests.get(send_text)
-
-		return response.json()
+		
+		try:
+			response = requests.get(send_text)
+			print('send mesage: ' + message)
+			return response.json()
+		except:
+			print('Failed message to send: ' + message)
 
 	def sendReport(self,doser,testRun,testKey):
 		message=str('Message from: ' + self.doserName + ', ' + testRun + ', This Was a Test')
 		self.telegram_bot_sendtext(message)
 
-	def sendReagentAlarm(self,doser,dose,remainingML):
-		message=str('From: ' + self.doserName + '\nReagent ' + str(dose) + ' Low, Remaining ML: '+ (str(remainingML)))
+	def sendReagentAlarm(self,doser,dose,remainingML,alarmSent):
+		if alarmSent is  False:
+			message=str('From: ' + self.doserName + '\nReagent ' + str(dose) + ' Low, Remaining ML: '+ (str(remainingML)))
+			self.telegram_bot_sendtext(message)
+			self.setAlarmSentTrue(dose)
+
+
+	def sendArduinoConnectionError(self,arduino):
+		message=str('From: ' + self.doserName + '\nArduino ' + str(arduino) + ' Connection lost')
 		self.telegram_bot_sendtext(message)
 
 def getBasePath():

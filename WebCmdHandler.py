@@ -34,7 +34,7 @@ def parseReload(doser,cmdOperation,cmdObject,cmdValue):
 
 def parseOperate(doser,cmdOperation,cmdObject,cmdValue):
     try:
-        queueDoseJob(doser,cmdOperation)                    
+        queueDoseJob(doser,cmdOperation,cmdObject)                    
                                         
     except:
         print('Unknown OPERATE operation: ' + cmdOperation)   
@@ -48,11 +48,11 @@ def parseCalibrate(doser,cmdOperation,cmdObject,cmdValue):
             ts=doser.doseSequenceList[cmdOperation]
             ts.amount=int(cmdObject)
             print(ts.amount)
-            newdosevalue=doser.addMLtoTotalML(ts,cmdOperation)
+            newdosevalue,fluidRemainingInML=doser.addMLtoTotalML(ts,cmdOperation)
             print(newdosevalue)
             doser.dosePump(ts.arduinoNumber,ts.pumpName,newdosevalue)
             print('Dose calibration value +- 50ML')
-                 
+            return True
         except:
             doser.debugLog.exception("Error in CALIBRATION parsing")
 

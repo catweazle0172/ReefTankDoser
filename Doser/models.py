@@ -48,6 +48,7 @@ class DoseDefinition(models.Model):
     fluidRemainingInML = models.FloatField(default=0, help_text="The amount of usable reagent remaining (computed by the machine)")
     containerInML = models.IntegerField(default=0, help_text="The amount of the container in ML")
     minimumThreshold = models.FloatField(default=0, help_text="Minium threshold for sending Telegram alarm")
+    alarmSent = models.BooleanField(default=False)
     totalDoseAfterStartup = models.FloatField(default=0, help_text="The amount of the container in ML")
     changeDirection = models.BooleanField(default=False)
     pumpSpeed = models.IntegerField(default=60, help_text="The amount pumped in 1 minut")
