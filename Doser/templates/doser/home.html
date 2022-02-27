@@ -83,6 +83,21 @@
 			</table>
 		</form>
 	</div>
+<br>
+	<div>
+			{% csrf_token %}
+				<div class="flex justify-around items-center">
+					
+			{% for dose in doseList %}
+					<div class="flex flex-col">
+						<div>{{dose.doseName}}</div>
+						<div>{{dose.fluidRemainingInML}}</div>
+					
+					</div>
+				{% endfor %}
+				
+			</div>
+</div>
 </div>
 
 {% endif %}
