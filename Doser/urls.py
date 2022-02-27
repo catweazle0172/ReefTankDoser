@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^logs/?(?P<formResult>[\w-]*)$',views.logs,name='logs'),
     #ex: /doser/admin
     url(r'^admin/?(?P<formResult>[\w-]*)$',views.admin,name='admin'),
+
 ]

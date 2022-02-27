@@ -18,8 +18,9 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
+    url(r'^', include('Doser.urls')),
     url(r'^doser/', include('Doser.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/', admin.site.urls),
-    url(r'^', include('Doser.urls')),
+
 ]

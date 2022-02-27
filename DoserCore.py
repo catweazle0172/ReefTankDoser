@@ -331,7 +331,7 @@ class Doser:
 				while True: 
 					self.ARDUINO1.write(str.encode("?" + '\n'))
 					self.ARDUINO1.flushInput() 
-					time.sleep(0.5)
+
 					grbl_out = str(self.ARDUINO1.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -351,6 +351,8 @@ class Doser:
 					if pump=='Z':
 						if (round(float(zas),2)) == float(ML):
 							return True
+							
+					time.sleep(0.5)
 			except:
 				self.sendArduinoConnectionError(arduino)
 				return False
@@ -362,7 +364,7 @@ class Doser:
 				while True: 
 					self.ARDUINO2.write(str.encode("?" + '\n'))
 					self.ARDUINO2.flushInput() 
-					time.sleep(0.5)
+
 					grbl_out = str(self.ARDUINO2.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -383,6 +385,8 @@ class Doser:
 						if (round(float(zas),2)) == float(ML):
 							return True
 
+					time.sleep(0.5)
+
 			except:
 				self.sendArduinoConnectionError(arduino)
 				return False
@@ -394,7 +398,7 @@ class Doser:
 				while True: 
 					self.ARDUINO3.write(str.encode("?" + '\n'))
 					self.ARDUINO3.flushInput() 
-					time.sleep(0.5)
+
 					grbl_out = str(self.ARDUINO3.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -415,6 +419,7 @@ class Doser:
 						if (round(float(zas),2)) == float(ML):
 							return True
 
+					time.sleep(0.5)
 			except:
 				self.sendArduinoConnectionError(arduino)
 				return False
@@ -426,7 +431,7 @@ class Doser:
 				while True: 
 					self.ARDUINO4.write(str.encode("?" + '\n'))
 					self.ARDUINO4.flushInput() 
-					time.sleep(0.5)
+
 					grbl_out = str(self.ARDUINO4.readline()) 
 					grbl_out_strip = grbl_out.split("|")
 					grbl_out_split = grbl_out_strip[1].split (',',3)
@@ -447,6 +452,7 @@ class Doser:
 						if (round(float(zas),2)) == float(ML):
 							return True
 
+					time.sleep(0.5)
 			except:
 				self.sendArduinoConnectionError(arduino)
 				return False

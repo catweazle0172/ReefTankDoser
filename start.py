@@ -28,11 +28,10 @@ def screenPresent(name):
 def runWebServer(doser,name):
 	from subprocess import call
 	generateWebLaunchFile(doser)
-	call(["screen","-d","-m","-S",name,"bash", "launchWebServer.sh"])   
+	call(["screen","-d","-m","-S",name,"bash", str(basePath) + "launchWebServer.sh"])   
 
 def generateWebLaunchFile(doser):
 	launchFile=basePath + "/launchWebServer.sh"
-	#launchText="#!/bin/bash\nexport WORKON_HOME=$HOME/.virtualenvs\nexport VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3\nsource /usr/local/bin/virtualenvwrapper.sh\nworkon "
 	launchText='python3 "' + basePath + 'manage.py" runserver 0.0.0.0:' + str(doser.webPort) + ' --insecure >> web.log 2>&1\n'
 	f=open(launchFile,"w+")
 	f.write(launchText)
