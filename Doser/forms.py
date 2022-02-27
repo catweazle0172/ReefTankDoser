@@ -6,6 +6,7 @@ class ScheduleForm(forms.ModelForm):
     class Meta:
         model = DoseSchedule
         exclude=()
+        hidden=('doseToSchedule')
 #        widgets = {
 #            'doseToSchedule': Textarea(attrs={'cols': 80, 'rows': 20}),
 #        }
