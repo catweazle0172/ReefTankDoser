@@ -44,9 +44,11 @@
       {% include 'doser/messages.html' %}
 
       <div class="p-4 rounded bg-white shadow-md flex flex-col items-center">
-          <div class="pb-4 title">
+          {% if pageName|length > 1 %}
+          <div id="1" class="pb-4 title">
             {{pageName}}
           </div>
+          {% endif %}
           <div class="w-full">
             {% block content %}
             {% endblock %}

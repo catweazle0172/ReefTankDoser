@@ -6,7 +6,7 @@ class ScheduleForm(forms.ModelForm):
     class Meta:
         model = DoseSchedule
         exclude=()
-#        widgets = {
+#       widgets = {
 #            'doseToSchedule': Textarea(attrs={'cols': 80, 'rows': 20}),
 #        }
     def __init__(self, *args, **kwargs):
@@ -14,9 +14,10 @@ class ScheduleForm(forms.ModelForm):
         if self.instance.id:
             self.fields['doseToSchedule'].widget.attrs['readonly'] = True
             self.fields['hoursToRun'].help_text="Control Select for more than on hour"
+            self.fields['doseToSchedule'].widget = forms.HiddenInput()
 
 
-           
+
 class DoseDefinitionForm(forms.ModelForm):
     class Meta:
         model = DoseDefinition
@@ -74,4 +75,4 @@ class CalibrationForm(forms.ModelForm):
             self.fields['pumpSpeed'].widget.attrs['title'] = "Total dosed liquid in ML Autotester"
             self.fields['calibrateValue'].label="Calibration amount"
             self.fields['calibrateValue'].widget.attrs['title'] = "Total dosed liquid that is dosed while calibrating"
-
+            self.fields['doseName'].widget = forms.HiddenInput()

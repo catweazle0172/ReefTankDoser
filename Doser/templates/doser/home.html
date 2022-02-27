@@ -22,7 +22,7 @@
 			</div>
 			<div class="content-notitle">
 			{% for dose in doseList %}
-				<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" class="btn" value="{{dose.doseName}}" />{{dose.doseName}}</button>
+				<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" onclick="return confirm('Are you sure?')" class="btn" value="{{dose.doseName}}" />{{dose.doseName}}</button>
 			{% endfor %}
 			</div>
 		</form>
@@ -45,7 +45,7 @@
 					<th class="table-th">Dose</th>
 					<th class="table-th">Status</th>
 					<th class="table-th">Timestamp</th>
-					<th class="table-th">Actions</th>
+					<th class="table-th"></th>
 				</thead>
 				<tbody>
 				{% for job in jobList %}
@@ -61,7 +61,9 @@
 						{% endif %}
 						>{{job.jobText}}</span></td>
 						<td class="table-td">{{job.timeStamp}}</td>
-						<td class="table-td"><button class="hover:font-bold hover:text-red-600" type="submit" form="updateQueue" name="jobAction"
+						<td class="table-td">
+							<div class="flex justify-around items-center">
+							<button class="hover:text-red-600" type="submit" form="updateQueue" name="jobAction"
 						{% if job.jobAction == "DELETE" %}
 							title="Delete this job from the queue" onclick="return confirm('Are You Sure?')"
 						{% elif job.jobAction == "REMOVE" %}
@@ -69,8 +71,12 @@
 						{% elif job.jobAction == "CANCEL" %}
 							title="Abort this job"  onclick="return confirm('Are You Sure?')"
 						{% endif %}
-						value="{{job.jobAction}}-{{job.jobIndex}}">{{job.jobAction}}
-						</button></td>
+						value="{{job.jobAction}}-{{job.jobIndex}}">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+							</svg>
+						<!-- {{job.jobAction}} -->
+						</button></div></td>
 					</tr>
 				{% endfor %}
 				</tbody>
@@ -82,7 +88,8 @@
 {% endif %}
 {% endblock %}
 
-<!-- <tr>
+<!-- <table>
+<tr>
 	<td title="Dose performed or queued to be run">{{job.jobName}}</td>
 	<td><input type="input" name="jobStatus" title="Status of the job" readonly="readonly" value="{{job.jobText}}" /></td>
 	<td><input type="input" name="timeStamp" title="When the job was completed or queued" value="{{job.timeStamp}}" /></td>
@@ -95,4 +102,5 @@
 		title="Abort this job"  onclick="return confirm('Are You Sure?')"
 	{% endif %}
 	value="{{job.jobAction}}-{{job.jobIndex}}">{{job.jobAction}}</button></td>
-</tr> -->
+</tr>
+</table> -->

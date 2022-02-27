@@ -14,9 +14,9 @@
 				{% if doseList %}
 				{% for dose in doseList %}
 				{% if dosedoseName == currentlySelected %}
-				<input class="btn-radio" type="radio" name="toDisplay" title="Select test for displaying results" checked = 'checked' value="{{test.testName}}"><label>{{dose.doseName}}</label>
+				<input class="btn-radio" type="radio" name="toDisplay" title="Select test for displaying results" checked = 'checked' value="{{dose.doseName}}"><label>{{dose.doseName}}</label>
 				{% else %}
-				<input class="btn-radio" type="radio" name="toDisplay" title="Select test for displaying results" value="{{test.testName}}"><label>{{dose.doseName}}</label>
+				<input class="btn-radio" type="radio" name="toDisplay" title="Select test for displaying results" value="{{dose.doseName}}"><label>{{dose.doseName}}</label>
 				{% endif %}
 				{% endfor %}
 				{% if "All" == currentlySelected %}
