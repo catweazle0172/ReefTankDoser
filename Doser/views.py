@@ -59,6 +59,12 @@ def home(request,formResult):
         except:
             pass
 
+        try:
+            updateRefillAction=request.POST['refillDose']
+            formToProcess = 'refillDose'
+        except:
+            pass
+
         if formToProcess == 'queueJob':
             try:
                 te=DoserExternal.objects.get(pk=1)
@@ -89,9 +95,29 @@ def home(request,formResult):
                 print('Error, unknown action')
                 #return HttpResponse("")
 
+        if formToProcess == 'refillDose':
+            lastStepSize='1'
+            refillDoser=DoseDefinition.objects.get(doseName=updateRefillAction)
+            refillDoser.fluidRemainingInML=refillDoser.containerInML
+            refillDoser.save()
+
     else:
         lastStepSize='1'
     doseList=DoseDefinition.objects.all()
+    doseLists=[]
+    for job in doseList:
+        test=JobEntry()
+        test.doseName=job.doseName
+        test.fluidRemainingInML=job.fluidRemainingInML
+        test.containerInML=job.containerInML
+
+        try:
+            test.percentage=round(job.fluidRemainingInML/job.containerInML*100)
+        except ZeroDivisionError:
+            test.percentage=0
+
+        doseLists.append(test)
+
     jobQueue=JobExternal.objects.all()
     jobList=[]
     for job in reversed(jobQueue):
@@ -127,7 +153,7 @@ def home(request,formResult):
         jobList.append(newJob)
         currentResult+=1
     stepSizeList=['1','5','10','30','90']
-    context={'pageName':pageName,'doseList':doseList,'jobList':jobList,'lastStepSize':lastStepSize,'stepSizeList':stepSizeList}
+    context={'pageName':pageName,'doseList':doseLists,'jobList':jobList,'lastStepSize':lastStepSize,'stepSizeList':stepSizeList}
     return render(request,'doser/home.html',context)
 
 

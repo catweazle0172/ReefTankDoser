@@ -54,6 +54,7 @@ class DoseDefinition(models.Model):
     pumpSteps = models.IntegerField(default=2500, help_text="Steps for pumping 1ML")
     calibrateValue = models.FloatField(default=50, help_text="Total dosed while calibrating")
 
+
     def __str__(self):
         return self.doseName
     
