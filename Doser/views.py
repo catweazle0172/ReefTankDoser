@@ -108,7 +108,7 @@ def home(request,formResult):
     for job in doseList:
         test=JobEntry()
         test.doseName=job.doseName
-        test.fluidRemainingInML=job.fluidRemainingInML
+        test.fluidRemainingInML=round(job.fluidRemainingInML)
         test.containerInML=job.containerInML
 
         try:
