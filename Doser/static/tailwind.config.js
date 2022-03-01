@@ -1,19 +1,17 @@
 module.exports = {
-  purge: [],
+  purge: ["./../templates/**/*.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
   variants: {
     extend: {
-      height: ['hover'],
-      width: ['hover'],
-      padding: ['hover'],
-      fontWeight: ['hover'],
-      backgroundColor: ['odd'],
+      height: ["hover"],
+      width: ["hover"],
+      padding: ["hover"],
+      fontWeight: ["hover"],
+      backgroundColor: ["odd"],
     },
   },
-  plugins: [
-     require('@tailwindcss/forms'),
-  ],
-}
+  plugins: [require("@tailwindcss/forms")],
+};

@@ -42,6 +42,9 @@
   .btn-radio {
     @apply text-blue-500;
   }
+  .liquid-level {
+    @apply cursor-default text-xs font-bold leading-none flex items-center justify-center m-1 py-4 text-center text-white;
+  }
   .alert {
     @apply p-4 my-4 flex justify-between items-center border-l-4 rounded shadow-md;
   }

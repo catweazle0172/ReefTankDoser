@@ -92,51 +92,52 @@
 	<div class="title">
 		Liquid levels
 	</div>
-
-	<!-- <div class="flex justify-around items-center">
-
-			{% for dose in doseList %}
-					<div class="flex flex-col">
-						<div>{{dose.doseName}}</div>
-						<div>{{dose.fluidRemainingInML}}</div>
-						<div>{{dose.containerInML}}</div>
+	<div class="flex flex-wrap justify-center">
+		{% for dose in doseList %}
+		<!--{# {% if dose.containerInML != 0 %} #}-->
+		<div class="w-48">
+			<div class="text-center font-bold">{{dose.doseName}}</div>
+			<div class="flex justify-center items-center">
+				<div class="text-center text-xs mr-2">{{dose.fluidRemainingInML}} / {{dose.containerInML}}</div>
+				<form action="/doser/" method="post" id="refillDose">
+					<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="refillDose" onclick="return confirm('Are you sure?')"
+						value="{{dose.doseName}}">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+	  					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+						</svg>
+					</button>
+				</form>
+			</div>
+  		<div class="shadow w-1/2 rounded border-2 border-gray-400 flex my-1 mx-auto relative">
+				<div style="width:{{dose.percentage}}%;"
+				{% if dose.percentage < 55 %}
+					class="liquid-level bg-red-400">
+				{% elif dose.percentage < 60 %}
+					{% if dose.percentage > 55 %}
+					class="liquid-level bg-yellow-400">
+					{% endif %}
+				{% else %}
+					class="liquid-level bg-green-400">
+				{% endif %}
+					<div class="flex justify-around items-center absolute left-0 mx-8 text-gray-700">
+						{% if dose.percentage < 10 %}
+						<div class="text-red-500 -ml-6 mr-1">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+							</svg>
+						</div>
+						{% endif %}
+						<div>
+							{{dose.percentage}}%
+						</div>
 					</div>
-				{% endfor %}
-
-
-			</div> -->
-
-
-<form action="/doser/" method="post" id="refillDose">
-<div class="flex flex-wrap justify-center">
-	{% for dose in doseList %}
-	<div class="w-48">
-	<div class="text-center font-bold">{{dose.doseName}}</div>
-	<div class="flex justify-center items-center">
-	<div class="text-center text-xs mr-2">{{dose.fluidRemainingInML}} / {{dose.containerInML}}</div>
-	<div>
-						<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="refillDose" onclick="return confirm('Are you sure?')" 
-						 value="{{dose.doseName}}" />
-		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-	  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-	</svg>
-	</button>
+    		</div>
+  		</div>
+		</div>
+		<!--{# {% endif %} #}-->
+		{% endfor %}
+	</div>
 </div>
-</div>
-
-  <div class="shadow w-1/2 rounded border-2 border-gray-400 flex my-1 mx-auto relative">
-    <div class="cursor-default bg-green-400 text-xs font-bold leading-none flex items-center justify-center m-1 py-4 text-center text-white"
-         style="width:{{dose.percentage}}%;">
-      <div class="absolute left-0 mx-8 text-gray-700">{{dose.percentage}}%</div>
-    </div>
-</form>
-  	</div>
-</div>
-{% endfor %}
-</div>
-
-</div>
-
 
 {% endif %}
 {% endblock %}
