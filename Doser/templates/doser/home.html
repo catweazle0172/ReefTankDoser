@@ -94,7 +94,7 @@
 	</div>
 	<div class="flex flex-wrap justify-center">
 		{% for dose in doseList %}
-		<!--{# {% if dose.containerInML != 0 %} #}-->
+		{% if dose.containerInML != 0 %}
 		<div class="w-48">
 			<div class="text-center font-bold">{{dose.doseName}}</div>
 			<div class="flex justify-center items-center">
@@ -110,17 +110,17 @@
 			</div>
   		<div class="shadow w-1/2 rounded border-2 border-gray-400 flex my-1 mx-auto relative">
 				<div style="width:{{dose.percentage}}%;"
-				{% if dose.percentage < 55 %}
+				{% if dose.percentage < 20 %}
 					class="liquid-level bg-red-400">
-				{% elif dose.percentage < 60 %}
-					{% if dose.percentage > 55 %}
+				{% elif dose.percentage < 35 %}
+					{% if dose.percentage > 20 %}
 					class="liquid-level bg-yellow-400">
 					{% endif %}
 				{% else %}
 					class="liquid-level bg-green-400">
 				{% endif %}
 					<div class="flex justify-around items-center absolute left-0 mx-8 text-gray-700">
-						{% if dose.percentage < 10 %}
+						{% if dose.percentage < 15 %}
 						<div class="text-red-500 -ml-6 mr-1">
 							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -134,7 +134,7 @@
     		</div>
   		</div>
 		</div>
-		<!--{# {% endif %} #}-->
+		{% endif %}
 		{% endfor %}
 	</div>
 </div>

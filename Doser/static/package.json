@@ -2,21 +2,18 @@
   "name": "reeftankdoser",
   "version": "1.0.0",
   "description": "tailwindcss for reeftankdoser",
-  "main": "postcss.config.js",
+  "main": "tailwind.config.js",
   "dependencies": {
-    "@tailwindcss/forms": "^0.3.3",
-    "autoprefixer": "^10.3.1",
-    "jquery": "^3.6.0",
-    "postcss": "^8.3.6",
-    "postcss-cli": "^8.3.1",
-    "tailwind": "^4.0.0",
-    "tailwindcss": "^2.2.7"
+    "jquery": "^3.6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "postcss css/tailwind-build.css -o doser/styles.css",
-    "build -w": "postcss css/tailwind-build.css -o doser/styles.css -w"
+    "dev": "npx tailwindcss -i ./src/input.css -o ./doser/site-style.css --watch"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.0.23",
+    "@tailwindcss/forms": "^0.4.0"
+  }
 }
