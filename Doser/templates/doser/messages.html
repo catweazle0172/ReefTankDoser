@@ -9,6 +9,12 @@
   {% endif %}
   ><div>{{ message.tags }} - {{ message }}</div>
   <button id="close" class="text-xl font-bold">X</button>
+
+  {% if message.tags == "success" %}
+  <script>closePopup(2000);</script>
+  {% else %}
+  <script>closePopup(5000);</script>
+  {% endif %}
   {% endfor %}
 </div>
 

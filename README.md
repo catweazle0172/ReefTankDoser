@@ -9,9 +9,9 @@ A application to handle your ReefTankDoser. ... ...
 
 ## Start server
 
-- python3 start.py
+- `python3 start.py`
 *or*
-- python3 manage.py runserver 8001 (Zonder communicatie met pompen)
+- `python3 manage.py runserver 8001` (Zonder communicatie met pompen)
 
 ## Use applicition
 
