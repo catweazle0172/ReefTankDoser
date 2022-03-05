@@ -22,7 +22,7 @@
 			</div>
 			<div class="content-notitle">
 			{% for dose in doseList %}
-				<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" onclick="return confirm('Are you sure?')" class="btn" value="{{dose.doseName}}" />{{dose.doseName}}</button>
+				<button type="submit" form="queueDose" title="add dose {{dose.doseName}} to run queue" name="doseName" onclick="return confirm('Are you sure?')" class="btn min-w-24" value="{{dose.doseName}}" />{{dose.doseName}}</button>
 			{% endfor %}
 			</div>
 		</form>
@@ -110,9 +110,9 @@
 			</div>
   		<div class="shadow w-1/2 rounded border-2 border-gray-400 flex my-1 mx-auto relative">
 				<div style="width:{{dose.percentage}}%;"
-				{% if dose.percentage < 20 %}
+				{% if dose.percentage < 21 %}
 					class="liquid-level bg-red-400">
-				{% elif dose.percentage < 35 %}
+				{% elif dose.percentage < 36 %}
 					{% if dose.percentage > 20 %}
 					class="liquid-level bg-yellow-400">
 					{% endif %}
@@ -120,7 +120,7 @@
 					class="liquid-level bg-green-400">
 				{% endif %}
 					<div class="flex justify-around items-center absolute left-0 mx-8 text-gray-700">
-						{% if dose.percentage < 15 %}
+						{% if dose.percentage < 16 %}
 						<div class="text-red-500 -ml-6 mr-1">
 							<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
   							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />

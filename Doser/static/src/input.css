@@ -19,13 +19,13 @@
     @apply p-4 text-2xl font-bold text-center;
   }
   .content-withtitle {
-    @apply flex justify-center items-center space-x-2 pb-4;
+    @apply flex flex-wrap justify-center items-center space-x-2 pb-4;
   }
   .content-notitle {
-    @apply flex justify-center items-center space-x-2 py-4;
+    @apply flex flex-wrap justify-center items-center space-x-2 py-4;
   }
   .btn {
-    @apply px-4 py-2 text-sm lg:text-base text-white uppercase bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 rounded shadow;
+    @apply mb-2 px-4 py-2 text-sm lg:text-base text-white uppercase bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 rounded shadow;
   }
   .btn-status {
     @apply py-1 px-3 rounded-full text-xs;

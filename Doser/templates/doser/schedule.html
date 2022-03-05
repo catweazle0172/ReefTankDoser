@@ -1,5 +1,4 @@
 {% extends 'doser/base.html' %}
-
 {% block content %}
 
 <div>
@@ -18,7 +17,7 @@
 				<div class="py-4 text-center font-bold">
 					Schedule for | {{schedForm.doseToSchedule.value}}
 				</div>
-				<div class="content-notitle">
+				<div class="content-notitle pb-4 overflow-x-scroll md:overflow-x-hidden">
 					<table id="schedEntry">
 						{{schedForm.as_table}}
 					</table>
